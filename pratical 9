@@ -1,0 +1,68 @@
+main.dart :
+import 'package:flutter/material.dart'; void main() {
+runApp(const GridViewApp());
+}
+class GridViewApp extends StatelessWidget { const GridViewApp({super.key});
+@override
+Widget build(BuildContext context) { return const MaterialApp(
+title: 'Grid View Example', home: GridScreen(),
+debugShowCheckedModeBanner: false,
+);
+}
+}
+class GridScreen extends StatelessWidget { const GridScreen({super.key});
+final List<Map<String, dynamic>> items = const [
+{
+'title': 'Android',
+'subtitle': 'App Development', 'color': Colors.green,
+'icon': Icons.android,
+},
+{
+'title': 'Web',
+'subtitle': 'HTML & CSS', 'color': Colors.blue, 'icon': Icons.language,
+},
+{
+'title': 'Python',
+'subtitle': 'AI / ML',
+'color': Colors.deepPurple, 'icon': Icons.memory,
+},
+{'title': 'Flutter',
+'subtitle': 'Cross-platform', 'color': Colors.cyan,
+'icon': Icons.flutter_dash,
+},
+];
+@override
+Widget build(BuildContext context) { return Scaffold(
+backgroundColor: const Color(0xFFF8F3FB), appBar: AppBar(
+title: const Text("Grid View"), backgroundColor: Colors.deepPurple,
+),
+body: Padding(
+padding: const EdgeInsets.all(12.0), child: GridView.builder( itemCount: items.length,
+gridDelegate: const SliverGridDelegateWithMaxCrossAxisExtent( maxCrossAxisExtent: 200, // Each item max width mainAxisSpacing: 10,
+crossAxisSpacing: 10,
+childAspectRatio: 3 / 2, // Smaller cards
+),
+itemBuilder: (context, index) { final item = items[index]; return Card(
+color: Colors.white, elevation: 2,
+shape: RoundedRectangleBorder( borderRadius: BorderRadius.circular(10),
+),
+child: Center( child: Column(
+mainAxisSize: MainAxisSize.min, children: [
+Icon(item['icon'], size: 30, color: item['color']), const SizedBox(height: 6),
+Text( item['title'],
+style: const TextStyle(fontWeight: FontWeight.bold),
+),
+Text( item['subtitle'], style: TextStyle(fontSize: 12,
+color: item['color'],
+),
+),
+],
+),
+),
+);
+},
+),
+),
+);
+}
+}
