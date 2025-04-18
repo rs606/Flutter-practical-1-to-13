@@ -1,0 +1,85 @@
+
+main.dart :
+import 'package:flutter/material.dart'; void main() {
+runApp(MyApp());
+}
+class MyApp extends StatelessWidget { @override
+Widget build(BuildContext context) { return MaterialApp(
+title: 'Navigation Demo', debugShowCheckedModeBanner: false,
+theme: ThemeData(primarySwatch: Colors.deepPurple), home: SignUpPage(),
+);
+}
+}
+// Sign Up Page
+class SignUpPage extends StatelessWidget { final nameController = TextEditingController(); final emailController = TextEditingController(); final phoneController = TextEditingController();
+final passwordController = TextEditingController();
+final confirmPasswordController = TextEditingController();
+@override
+Widget build(BuildContext context) { return Scaffold(
+backgroundColor: Color(0xFFF9F5FC), body: Padding(
+padding: const EdgeInsets.all(25.0), child: Center(
+child: SingleChildScrollView( child: Column(
+children: [
+Text("Sign up", style: TextStyle(fontSize: 28, fontWeight: FontWeight.bold)), Text("Create your account", style: TextStyle(fontSize: 16, color: Colors.grey[700])), SizedBox(height: 30),// Name
+_inputField(Icons.person, "Name", nameController), SizedBox(height: 15),
+// Email
+_inputField(Icons.email, "Email", emailController), SizedBox(height: 15),
+// Phone
+_inputField(Icons.phone, "Phone", phoneController), SizedBox(height: 15),
+// Password
+_inputField(Icons.lock, "Password", passwordController, isPassword: true), SizedBox(height: 15),
+// Confirm Password
+_inputField(Icons.lock_outline, "Confirm Password", confirmPasswordController, isPassword: true),
+SizedBox(height: 30),
+// Sign up Button SizedBox(
+width: double.infinity, height: 50,
+child: ElevatedButton( onPressed: () { Navigator.push(
+context,
+MaterialPageRoute(builder: (context) => WelcomePage()),
+);
+},
+style: ElevatedButton.styleFrom( backgroundColor: Colors.lightBlueAccent,
+shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(30)),
+),
+child: Text("Sign up", style: TextStyle(fontSize: 18)),
+),
+),
+SizedBox(height: 20),
+Text("Already have an account? ", style: TextStyle(color: Colors.grey)), TextButton(onPressed: () {}, child: Text("Login")),
+],
+),
+),
+),
+),);
+}
+Widget _inputField(IconData icon, String hint, TextEditingController controller, {bool isPassword = false}) {
+return Container( decoration: BoxDecoration(
+color: Colors.deepPurple[50], borderRadius: BorderRadius.circular(12),
+),
+child: TextField( controller: controller, obscureText: isPassword,
+decoration: InputDecoration( prefixIcon: Icon(icon), border: InputBorder.none, hintText: hint,
+contentPadding: EdgeInsets.symmetric(horizontal: 15, vertical: 18),
+),
+),
+);
+}
+}
+// Welcome Page
+class WelcomePage extends StatelessWidget { @override
+Widget build(BuildContext context) { return Scaffold(
+appBar: AppBar(
+title: Text("Welcome Screen"), backgroundColor: Colors.deepPurple,
+),
+body: Container(
+color: Colors.deepPurple, child: Center(
+child: Column(
+mainAxisAlignment: MainAxisAlignment.center, children: [
+Icon(Icons.waving_hand, size: 80, color: Colors.white), SizedBox(height: 20),
+Text("Welcome to purple Page!", style: TextStyle(color: Colors.white, fontSize: 24)),
+],
+),
+),
+),
+);
+}
+}
