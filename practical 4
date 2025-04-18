@@ -1,0 +1,55 @@
+main.dart :
+import 'package:flutter/material.dart'; void main() {
+runApp( MaterialApp(
+debugShowCheckedModeBanner: false, home: Scaffold(
+backgroundColor: Colors.white, appBar: AppBar(
+title: Text("Row & Column UI"), backgroundColor: Colors.deepPurpleAccent, centerTitle: true,
+),
+body: Padding(
+padding: EdgeInsets.all(20), child: Column(
+mainAxisAlignment: MainAxisAlignment.center, children: [
+// Row title
+Text(
+"Popular Technologies",
+style: TextStyle(fontSize: 20, fontWeight: FontWeight.bold),
+),
+SizedBox(height: 15),
+// Row of boxes
+Row(
+mainAxisAlignment: MainAxisAlignment.spaceEvenly, children: [
+buildBox("Flutter", Colors.lightBlue), buildBox("Android", Colors.green), buildBox("Firebase", Colors.amber),
+],
+),
+SizedBox(height: 40),
+// Column title
+Text(
+"Top Frameworks",style: TextStyle(fontSize: 20, fontWeight: FontWeight.bold),
+),
+SizedBox(height: 15),
+// Column of boxes buildBox("React.js", Colors.redAccent), SizedBox(height: 10), buildBox("Flutter", Colors.orange), SizedBox(height: 10),
+buildBox("MySQL", Colors.deepOrange),
+],
+),
+),
+),
+),
+);
+}
+// Reusable widget for styled boxes
+Widget buildBox(String text, Color color) { return Container(
+padding: EdgeInsets.symmetric(horizontal: 25, vertical: 12), decoration: BoxDecoration(
+color: color,
+borderRadius: BorderRadius.circular(10), boxShadow: [
+BoxShadow(
+color: color.withOpacity(0.4), blurRadius: 6,
+offset: Offset(0, 4),
+),
+],
+),
+child: Text( text,
+style: TextStyle( fontSize: 16,
+fontWeight: FontWeight.bold, color: Colors.white,
+),
+),
+);
+}
