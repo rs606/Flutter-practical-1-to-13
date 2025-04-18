@@ -1,0 +1,95 @@
+import 'package:flutter/material.dart'; void main() {
+runApp(MaterialApp( debugShowCheckedModeBanner: false, home: RegistrationForm(),
+));
+}
+class RegistrationForm extends StatefulWidget { @override
+_RegistrationFormState createState() => _RegistrationFormState();
+}
+class _RegistrationFormState extends State<RegistrationForm> { final _formKey = GlobalKey<FormState>();
+final nameController = TextEditingController(); final emailController = TextEditingController(); final mobileController = TextEditingController(); final passwordController = TextEditingController();
+final confirmPasswordController = TextEditingController();
+void _registerUser() {
+if (_formKey.currentState!.validate()) {
+if (passwordController.text == confirmPasswordController.text) { ScaffoldMessenger.of(context).showSnackBar(
+SnackBar(
+content: Text("Registration Successful 3 .‘~˙.ª~·˛"), backgroundColor: Colors.green,
+),
+);
+} else { ScaffoldMessenger.of(context).showSnackBar( SnackBar(
+content: Text("Passwords do not match +"), backgroundColor: Colors.red,
+),
+)}
+}
+}
+@override
+Widget build(BuildContext context) { return Scaffold(
+appBar: AppBar(
+title: Text("Practical - 6: Register"), backgroundColor: Colors.redAccent, centerTitle: true,
+),
+body: SingleChildScrollView( padding: EdgeInsets.all(20), child: Form(
+key: _formKey, child: Column( children: [
+SizedBox(height: 10), Text(
+"Register New Account",
+style: TextStyle(fontSize: 18, color: Colors.grey[800]),
+),
+SizedBox(height: 25),
+// Name
+TextFormField(
+controller: nameController, decoration: InputDecoration( labelText: "Name",
+border: OutlineInputBorder(),
+),
+validator: (value) =>
+value!.isEmpty ? "Please enter your name" : null,
+),
+SizedBox(height: 15),
+// Email
+TextFormField(
+controller: emailController, decoration: InputDecoration( labelText: "Email Address", border: OutlineInputBorder(),
+),
+validator: (value) =>
+value!.isEmpty ? "Please enter your email" : null,
+),SizedBox(height: 15),
+// Mobile
+TextFormField(
+controller: mobileController, keyboardType: TextInputType.phone, decoration: InputDecoration( labelText: "Mobile Number",
+border: OutlineInputBorder(),
+),
+validator: (value) =>
+value!.isEmpty ? "Enter mobile number" : null,
+),
+SizedBox(height: 15),
+// Password
+TextFormField(
+controller: passwordController, obscureText: true,
+decoration: InputDecoration( labelText: "Password", border: OutlineInputBorder(),
+),
+validator: (value) =>
+value!.isEmpty ? "Enter password" : null,
+),
+SizedBox(height: 15),
+// Confirm Password
+TextFormField(
+controller: confirmPasswordController, obscureText: true,
+decoration: InputDecoration( labelText: "Confirm Password", border: OutlineInputBorder(),
+),
+validator: (value) =>
+value!.isEmpty ? "Confirm your password" : null,
+),
+SizedBox(height: 25),
+// Register Button
+SizedBox(
+width: double.infinity, child: ElevatedButton( onPressed: _registerUser,
+style: ElevatedButton.styleFrom(backgroundColor: Colors.amber, foregroundColor: Colors.black,
+padding: EdgeInsets.symmetric(vertical: 14), shape: RoundedRectangleBorder( borderRadius: BorderRadius.circular(30),
+),
+),
+child: Text("Register", style: TextStyle(fontSize: 16)),
+),
+),
+],
+),
+),
+),
+);
+}
+}
