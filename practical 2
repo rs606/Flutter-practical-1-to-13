@@ -1,0 +1,24 @@
+main.dart :
+import 'package:flutter/material.dart';
+void main() { runApp(MaterialApp(
+debugShowCheckedModeBanner: false, home: Scaffold(
+appBar: AppBar(
+title: Text('MyApp'), // Title of AppBar backgroundColor: Colors.grey, // Background color centerTitle: true, // Center title
+elevation: 5.0, // Adds shadow
+),
+backgroundColor: Colors.grey[200], // Background color of Scaffold
+body: Center( child: Column(
+mainAxisAlignment: MainAxisAlignment.center, children: [
+Text(
+'Hello, Flutter!', style: TextStyle(
+fontSize: 24.0, // Font size
+fontWeight: FontWeight.bold, // Font weight color: Colors.blue, // Text color letterSpacing: 2.0, // Letter spacing
+),
+textAlign: TextAlign.center, // Align text
+),
+],
+),
+),
+),
+));
+}
